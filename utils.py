@@ -12,13 +12,25 @@ def split_sequence(sequence, n_steps):
         y.append(seq_y)
     return np.array(X), np.array(y)
 
-def plot_predictions(test_set, predicted_price, title="Stock Price Prediction"):
-    """ฟังก์ชันสำหรับวาดกราฟเปรียบเทียบราคาจริงกับราคาทำนาย"""
-    plt.figure(figsize=(16, 4))
+def plot_predictions(test_set, predicted_price, title="MasterCard Stock Price Prediction"):
+    plt.figure(figsize=(14, 5))
     plt.plot(test_set, color="gray", label="Real Price")
     plt.plot(predicted_price, color="red", label="Predicted Price")
     plt.title(title)
-    plt.xlabel("Time")
+    plt.xlabel("Time (Days)")
     plt.ylabel("Stock Price")
     plt.legend()
+    plt.grid(True)
+    plt.show()
+
+def plot_loss(history):
+    plt.figure(figsize=(8, 4))
+    plt.plot(history.history['loss'], label='Train Loss')
+    if 'val_loss' in history.history:
+        plt.plot(history.history['val_loss'], label='Val Loss')
+    plt.title('Model Loss Progress')
+    plt.xlabel('Epoch')
+    plt.ylabel('Loss (MSE)')
+    plt.legend()
+    plt.grid(True)
     plt.show()
